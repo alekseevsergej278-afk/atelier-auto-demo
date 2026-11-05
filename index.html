@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=mobile-fullhd-process-list-20261105">
+  <link rel="stylesheet" href="styles.css?v=demo-prices-list-20261105">
 </head>
 <body>
   <a class="skip-link" href="#main">Перейти к содержанию</a>
@@ -78,52 +78,74 @@
     <section class="section services" id="services" aria-labelledby="services-title">
       <div class="container services__layout">
         <div class="services__intro" data-reveal>
-          <p class="eyebrow">В мастерской</p>
-          <h2 id="services-title">С какими вопросами приезжают</h2>
+          <p class="eyebrow">Мастерская</p>
+          <h2 id="services-title">Работы<br>и цены</h2>
           <p class="services__lead">
-            Плановое обслуживание или странный звук, который появился на прошлой неделе.
-            Начинаем с осмотра и выясняем, что происходит с машиной.
+            От простого ТО до работ с тормозами. По конкретной машине итоговая стоимость может отличаться.
           </p>
           <p class="services__note">
-            Перечень работ и стоимость обсуждаем после проверки автомобиля.
+            Суммы условные — только для макета. Перед запуском сайта их заменим на реальные цены сервиса.
           </p>
         </div>
 
-        <div class="service-list" aria-label="Направления работ">
+        <div class="service-list" aria-label="Примеры работ и демонстрационные цены">
+          <div class="service-list__head" aria-hidden="true">
+            <span>Работа</span>
+            <span>Стоимость</span>
+          </div>
+
           <article class="service-row" data-reveal>
             <span class="service-row__number">01</span>
-            <h3>Замена масла и ТО</h3>
-            <p>Масло, фильтры, технические жидкости и проверки по регламенту именно вашей модели. Подскажем, что пора менять, а что ещё послужит.</p>
+            <div class="service-row__details">
+              <h3>Замена масла и фильтра</h3>
+              <p>Работа по замене и проверка уровня. Масло и фильтр оплачиваются отдельно.</p>
+            </div>
+            <span class="service-row__price">от 2 000 ₽</span>
           </article>
 
           <article class="service-row" data-reveal>
             <span class="service-row__number">02</span>
-            <h3>Диагностика электроники</h3>
-            <p>Загорелся индикатор или появились ошибки? Считываем коды, проверяем показания и ищем причину — сам код ещё не повод менять деталь.</p>
+            <div class="service-row__details">
+              <h3>Компьютерная диагностика</h3>
+              <p>Считывание ошибок и первичная проверка параметров электронных систем.</p>
+            </div>
+            <span class="service-row__price">от 1 500 ₽</span>
           </article>
 
           <article class="service-row" data-reveal>
             <span class="service-row__number">03</span>
-            <h3>Стук в подвеске</h3>
-            <p>Проверяем люфты, амортизаторы, рычаги и рулевые тяги. Важно понять, откуда идёт звук, особенно если он появляется только на неровной дороге.</p>
+            <div class="service-row__details">
+              <h3>Осмотр подвески</h3>
+              <p>Проверка люфтов, сайлентблоков, амортизаторов и рулевых тяг.</p>
+            </div>
+            <span class="service-row__price">от 1 200 ₽</span>
           </article>
 
           <article class="service-row" data-reveal>
             <span class="service-row__number">04</span>
-            <h3>Тормоза</h3>
-            <p>Осматриваем колодки и диски, проверяем суппорты и состояние жидкости. Вибрацию или увод машины при торможении лучше описать заранее.</p>
+            <div class="service-row__details">
+              <h3>Замена тормозных колодок</h3>
+              <p>Работа на одной оси. Стоимость деталей в сумму не входит.</p>
+            </div>
+            <span class="service-row__price">от 2 500 ₽</span>
           </article>
 
           <article class="service-row" data-reveal>
             <span class="service-row__number">05</span>
-            <h3>Двигатель и коробка</h3>
-            <p>Потёки, посторонний шум, вибрация или непривычные переключения — фиксируем симптомы и проверяем узлы, с которыми они могут быть связаны.</p>
+            <div class="service-row__details">
+              <h3>Тормозные диски и колодки</h3>
+              <p>Замена комплекта на одной оси, без стоимости запчастей.</p>
+            </div>
+            <span class="service-row__price">от 4 500 ₽</span>
           </article>
 
           <article class="service-row" data-reveal>
             <span class="service-row__number">06</span>
-            <h3>Шины и колёса</h3>
-            <p>Сезонная смена, балансировка, проверка давления и осмотр шин. Обратим внимание на неравномерный износ и повреждения.</p>
+            <div class="service-row__details">
+              <h3>Шиномонтаж</h3>
+              <p>Комплект из четырёх колёс. Итог зависит от диаметра и типа дисков.</p>
+            </div>
+            <span class="service-row__price">от 3 500 ₽</span>
           </article>
         </div>
       </div>
@@ -286,6 +308,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=mobile-fullhd-process-list-20261105" defer></script>
+  <script src="script.js?v=demo-prices-list-20261105" defer></script>
 </body>
 </html>
