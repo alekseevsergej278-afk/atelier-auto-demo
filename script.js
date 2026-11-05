@@ -31,29 +31,56 @@
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const heroVideo = document.querySelector(".hero__video");
+  const videoStartButton = document.querySelector(".hero__video-start");
 
   if (heroVideo) {
-    const useMobileVideo = window.matchMedia("(max-width: 700px)").matches;
-    const videoPath = useMobileVideo
-      ? heroVideo.dataset.mobileSrc
-      : heroVideo.dataset.desktopSrc;
+    heroVideo.muted = true;
+    heroVideo.defaultMuted = true;
+    heroVideo.playsInline = true;
+    heroVideo.setAttribute("muted", "");
+    heroVideo.setAttribute("playsinline", "");
 
-    if (videoPath) {
-      heroVideo.src = videoPath;
+    // The mobile file is the native HTML fallback. Use the larger file on desktop only.
+    if (!window.matchMedia("(max-width: 700px)").matches) {
+      heroVideo.src = "assets/video/atelier-driving-720.mp4";
       heroVideo.load();
     }
 
-    if (!reducedMotion) {
-      const playHeroVideo = () => {
-        if (document.visibilityState !== "visible") return;
-        const playback = heroVideo.play();
-        if (playback && typeof playback.catch === "function") {
-          playback.catch(() => {
-            // The poster remains visible when autoplay is restricted by the browser.
-          });
-        }
-      };
+    const showStartButton = () => {
+      if (videoStartButton) videoStartButton.hidden = false;
+    };
 
+    const hideStartButton = () => {
+      if (videoStartButton) videoStartButton.hidden = true;
+    };
+
+    const playHeroVideo = async () => {
+      if (document.visibilityState !== "visible") return;
+
+      try {
+        await heroVideo.play();
+        hideStartButton();
+      } catch (error) {
+        // Some mobile browsers block autoplay; offer a direct tap-to-play control.
+        showStartButton();
+      }
+    };
+
+    heroVideo.addEventListener("playing", hideStartButton);
+    heroVideo.addEventListener("error", showStartButton);
+    if (heroVideo.error) showStartButton();
+
+    if (videoStartButton) {
+      videoStartButton.addEventListener("click", () => {
+        heroVideo.muted = true;
+        playHeroVideo();
+      });
+    }
+
+    if (reducedMotion) {
+      heroVideo.pause();
+      showStartButton();
+    } else {
       heroVideo.addEventListener("loadeddata", playHeroVideo, { once: true });
       heroVideo.addEventListener("canplay", playHeroVideo, { once: true });
       document.addEventListener("visibilitychange", () => {
@@ -61,9 +88,6 @@
         else heroVideo.pause();
       });
       window.addEventListener("pageshow", playHeroVideo);
-      ["pointerdown", "touchstart", "keydown"].forEach((type) => {
-        document.addEventListener(type, playHeroVideo, { once: true, passive: true });
-      });
       playHeroVideo();
     }
   }
