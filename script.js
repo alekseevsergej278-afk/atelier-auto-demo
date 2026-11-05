@@ -54,10 +54,15 @@
         }
       };
 
+      heroVideo.addEventListener("loadeddata", playHeroVideo, { once: true });
       heroVideo.addEventListener("canplay", playHeroVideo, { once: true });
       document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "visible") playHeroVideo();
         else heroVideo.pause();
+      });
+      window.addEventListener("pageshow", playHeroVideo);
+      ["pointerdown", "touchstart", "keydown"].forEach((type) => {
+        document.addEventListener(type, playHeroVideo, { once: true, passive: true });
       });
       playHeroVideo();
     }
