@@ -62,14 +62,14 @@
 
 
 /* LIVE-ACTION HERO FILM — Mixkit free-license stock video, local optimized MP4 */
-.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 54%;z-index:0;filter:saturate(.82) contrast(1.12) brightness(.72);animation:atelierFilmReveal 1.4s ease-out both;will-change:opacity}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 54%;z-index:0;animation:atelierFilmReveal 1.4s ease-out both}
 @keyframes atelierFilmReveal{from{opacity:0}to{opacity:1}}
 .hero-bg{display:none!important}
 .atelier-vehicle-scene{display:none!important}
 .hero:before{background:linear-gradient(90deg,#101112 2%,#101112e8 34%,#10111224 82%),linear-gradient(0deg,#101112 0%,transparent 42%),radial-gradient(ellipse at 72% 55%,#ffffff10,transparent 46%);z-index:-1}
-@media(max-width:700px){.hero-video{object-fit:cover;object-position:48% 54%;filter:saturate(.82) contrast(1.08) brightness(.72);background:#101112}.hero:before{background:linear-gradient(90deg,#101112d9 0%,#10111270 48%,#10111220 100%),linear-gradient(0deg,#101112 0%,transparent 54%)}}
+@media(max-width:700px){.hero-video{object-fit:cover;object-position:48% 54%;background:#101112}.hero:before{background:linear-gradient(90deg,#101112d9 0%,#10111270 48%,#10111220 100%),linear-gradient(0deg,#101112 0%,transparent 54%)}}
 @media(prefers-reduced-motion:reduce){.hero-video{display:block;animation:none}.hero-bg{display:none!important;transform:none!important;animation:none!important}}
-</style></head><body><div class="topline wrap"><span>Точная инженерия · честный сервис</span><span>Работаем ежедневно · 09:00—21:00</span></div><header class="nav wrap"><a class="logo" href="#">ATELIER<span>.</span>AUTO</a><nav class="navlinks"><a href="#services">Услуги</a><a href="#about">О нас</a><a href="#work">Работы</a><a href="#booking">Запись</a></nav><a class="nav-cta" href="#booking">Записаться <span>↗</span></a></header><main><section class="hero"><video class="hero-video" id="heroFilm" autoplay muted loop playsinline preload="metadata" poster="assets/video/atelier-driving-poster.jpg" aria-hidden="true"><source src="assets/video/atelier-driving-720.mp4" type="video/mp4"></video><div class="hero-bg" id="heroBg"></div><div class="atelier-vehicle-scene" aria-hidden="true">
+</style></head><body><div class="topline wrap"><span>Точная инженерия · честный сервис</span><span>Работаем ежедневно · 09:00—21:00</span></div><header class="nav wrap"><a class="logo" href="#">ATELIER<span>.</span>AUTO</a><nav class="navlinks"><a href="#services">Услуги</a><a href="#about">О нас</a><a href="#work">Работы</a><a href="#booking">Запись</a></nav><a class="nav-cta" href="#booking">Записаться <span>↗</span></a></header><main><section class="hero"><video class="hero-video" id="heroFilm" autoplay muted loop playsinline preload="auto" poster="assets/video/atelier-driving-poster.jpg" aria-hidden="true"><source media="(max-width: 700px)" src="assets/video/atelier-driving-360.mp4" type="video/mp4"><source src="assets/video/atelier-driving-720.mp4" type="video/mp4"></video><div class="hero-bg" id="heroBg"></div><div class="atelier-vehicle-scene" aria-hidden="true">
 <svg viewBox="0 0 1000 440" role="presentation">
 <defs>
  <linearGradient id="atelierBody" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3f1eb"/><stop offset=".34" stop-color="#8f9699"/><stop offset=".62" stop-color="#252a2d"/><stop offset="1" stop-color="#080a0b"/></linearGradient>
@@ -192,13 +192,12 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.targ
   film.setAttribute('playsinline', '');
   film.preload = 'auto';
   const startFilm = () => {
-    if (document.visibilityState === 'hidden') return;
+    if (document.visibilityState === 'hidden' || !film.paused) return;
     const attempt = film.play();
     if (attempt && typeof attempt.catch === 'function') attempt.catch(() => {});
   };
   film.addEventListener('loadeddata', startFilm, { once: true });
-  film.addEventListener('canplay', startFilm);
-  document.addEventListener('visibilitychange', startFilm);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') startFilm(); });
   window.addEventListener('pageshow', startFilm);
   ['pointerdown', 'touchstart', 'keydown'].forEach(type =>
     document.addEventListener(type, startFilm, { once: true, passive: true })
