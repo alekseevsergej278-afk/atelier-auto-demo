@@ -10,7 +10,7 @@
   --accent-soft: #ff865f;
   --font-body: "Manrope", Arial, sans-serif;
   --font-display: "Oswald", "Arial Narrow", sans-serif;
-  --container: 1200px;
+  --container: 1600px;
 }
 
 * { box-sizing: border-box; }
