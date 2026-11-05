@@ -30,6 +30,27 @@
 @media(max-width:850px){.atelier-vehicle-scene{width:100%;right:-16%;bottom:104px;opacity:.83}.hero-content{z-index:3}.hero:before{background:linear-gradient(90deg,#101112 0%,#101112c9 42%,#10111250 100%),linear-gradient(0deg,#101112 0%,transparent 55%)}}
 @media(max-width:560px){.atelier-vehicle-scene{width:124%;right:-30%;bottom:108px;opacity:.72}.atelier-car{animation-duration:2s}.hero-stats{z-index:4}}
 @media(prefers-reduced-motion:reduce){.atelier-car,.atelier-wheel,.atelier-beam,.atelier-light-streak{animation:none!important;transform:none!important;opacity:1!important}}
+
+/* PORTFOLIO MOTION SYSTEM — ATELIER AUTO */
+:root{scroll-behavior:smooth;scroll-padding-top:90px}
+.motion-progress{position:fixed;z-index:9999;top:0;left:0;width:100%;height:2px;pointer-events:none;background:#ffffff18}
+.motion-progress span{display:block;width:100%;height:100%;transform:scaleX(0);transform-origin:left center;background:linear-gradient(90deg,#b78b59,#f1d8b0);box-shadow:0 0 14px #d6ad79aa}
+.motion-reveal{opacity:0;transform:translate3d(0,46px,0) scale(.985);filter:blur(7px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform 1.05s cubic-bezier(.16,1,.3,1),filter .9s ease;transition-delay:var(--motion-delay,0ms);will-change:transform,opacity}
+.motion-reveal.in-view{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}
+.motion-image{overflow:hidden}
+.motion-image img{transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter 1.2s ease;will-change:transform}
+.motion-image.in-view img{transform:scale(1.035)}
+.service.motion-card{transform-style:preserve-3d;transition:transform .35s ease,background .35s,box-shadow .35s}
+.service.motion-card:hover{box-shadow:0 22px 50px #0005}
+.motion-card>*{transform:translateZ(12px)}
+.motion-card.in-view{transform:perspective(1100px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg))}
+.motion-image img{translate:0 var(--parallax-y,0px)}
+.navlinks a.is-active{color:#d7b78c}
+.motion-cursor{position:fixed;z-index:998;left:0;top:0;width:260px;height:260px;border-radius:50%;pointer-events:none;opacity:0;transform:translate(-50%,-50%);background:radial-gradient(circle,#c79a6520,transparent 68%);mix-blend-mode:screen;transition:opacity .25s}
+@media(hover:hover) and (pointer:fine){.motion-cursor{opacity:1}}
+@media(max-width:850px){.motion-cursor{display:none}.motion-progress{height:2px}.motion-reveal{filter:none;transform:translateY(24px)}}
+@media(prefers-reduced-motion:reduce){:root{scroll-behavior:auto}.motion-reveal{opacity:1;transform:none;filter:none;transition:none}.motion-image img{transition:none}.motion-cursor{display:none}}
+
 </style></head><body><div class="cursor-glow" id="glow"></div><div class="topline wrap"><span>Точная инженерия · честный сервис</span><span>Работаем ежедневно · 09:00—21:00</span></div><header class="nav wrap"><a class="logo" href="#">ATELIER<span>.</span>AUTO</a><nav class="navlinks"><a href="#services">Услуги</a><a href="#about">О нас</a><a href="#work">Работы</a><a href="#booking">Запись</a></nav><a class="nav-cta" href="#booking">Записаться <span>↗</span></a></header><main><section class="hero"><div class="hero-bg" id="heroBg"></div><div class="atelier-vehicle-scene" aria-hidden="true">
 <svg viewBox="0 0 1000 440" role="presentation">
 <defs>
@@ -56,4 +77,95 @@
 <section id="work"><div class="wrap"><div class="section-head reveal"><div><div class="eyebrow">Атмосфера сервиса</div><h2>Работаем<br>с характером</h2></div><p>Чистое рабочее пространство, современное оборудование и уважение к каждой машине.</p></div><div class="gallery-grid reveal"><a data-label="Точная диагностика"><img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1100&q=85" alt="Диагностика автомобиля"></a><a data-label="Технологии"><img src="https://images.unsplash.com/photo-1632823471565-1ecdf5c7f4a5?auto=format&fit=crop&w=800&q=85" alt="Автомобиль на обслуживании"></a><a data-label="Профессионализм"><img src="https://images.unsplash.com/photo-1625047509168-a7026f36de04?auto=format&fit=crop&w=800&q=85" alt="Механик"></a><a data-label="Внимание к деталям"><img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=85" alt="Рабочее место"></a></div></div></section>
 <section class="booking" id="booking"><div class="wrap booking-grid"><div class="booking-copy reveal"><div class="eyebrow">Запись на обслуживание</div><h2>Пора уделить<br>внимание<br>автомобилю.</h2><p>Оставьте контакты — администратор свяжется с вами, уточнит задачу и предложит удобное время.</p><p style="color:#eee;font-size:11px">☎ +7 (900) 000-00-00<br>⌖ Москва, адрес указывается владельцем</p></div><form class="form reveal delay1" id="leadForm"><h3>Записаться в сервис</h3><small>Ответим и поможем сориентироваться по услуге</small><div class="fields"><input required placeholder="Ваше имя"><input required type="tel" placeholder="Телефон"><input class="wide" placeholder="Марка и модель автомобиля"><select class="wide"><option>Выберите услугу</option><option>Техническое обслуживание</option><option>Диагностика</option><option>Ремонт подвески</option><option>Тормозная система</option><option>Другое</option></select><textarea class="wide" rows="2" placeholder="Кратко опишите задачу"></textarea></div><button class="btn" type="submit">Отправить заявку ↗</button><p class="form-note">Демо-форма: отправка заявки не подключена. При запуске для клиента подключается телефон, CRM или почта и политика обработки персональных данных.</p></form></div></section></main><footer class="footer"><div class="wrap footer-row"><a class="logo" href="#">ATELIER<span>.</span>AUTO</a><span>Премиальный автосервис · Демо-концепция</span><span>© 2026</span></div></footer><script>
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));const glow=document.getElementById('glow');window.addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'},{passive:true});const hero=document.getElementById('heroBg');window.addEventListener('scroll',()=>{if(innerWidth>850)hero.style.transform='scale(1.08) translateY('+scrollY*.12+'px)'},{passive:true});document.getElementById('leadForm').addEventListener('submit',e=>{e.preventDefault();alert('Спасибо! Это демонстрационная форма. Для реального сайта подключим отправку заявок.');e.target.reset()});
-</script></body></html>
+</script><script>
+
+/* Editorial interaction layer: section choreography, scroll progress and gentle depth. */
+(() => {
+  const root=document.documentElement;
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  const progress=document.createElement('div');
+  progress.className='motion-progress';
+  progress.innerHTML='<span></span>';
+  document.body.appendChild(progress);
+  const bar=progress.firstElementChild;
+  const cursor=document.createElement('div');
+  cursor.className='motion-cursor';
+  document.body.appendChild(cursor);
+
+  const targets=document.querySelectorAll('.section-head,.service,.about-photo,.about-copy,.gallery-grid,.booking-copy,.form');
+  targets.forEach((el,i)=>{
+    el.classList.add('motion-reveal');
+    el.style.setProperty('--motion-delay',(el.matches('.service')?(i%4)*95:Math.min(i,3)*65)+'ms');
+  });
+  const images=document.querySelectorAll('.about-photo img,.gallery-grid img');
+  images.forEach(img=>img.closest('a,div,figure')?.classList.add('motion-image'));
+  document.querySelectorAll('.service').forEach(el=>el.classList.add('motion-card'));
+
+  if(reduce || !('IntersectionObserver' in window)){
+    targets.forEach(el=>el.classList.add('in-view'));
+  } else {
+    const io=new IntersectionObserver((entries,observer)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){entry.target.classList.add('in-view');observer.unobserve(entry.target);}
+      });
+    },{threshold:.12,rootMargin:'0px 0px -7% 0px'});
+    targets.forEach(el=>io.observe(el));
+  }
+
+  const sections=[...document.querySelectorAll('main section[id]')];
+  const navLinks=[...document.querySelectorAll('.navlinks a')];
+  if('IntersectionObserver' in window){
+    const navObserver=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          navLinks.forEach(a=>a.classList.toggle('is-active',a.getAttribute('href')==='#'+entry.target.id));
+        }
+      });
+    },{rootMargin:'-35% 0px -55% 0px',threshold:0});
+    sections.forEach(s=>navObserver.observe(s));
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const hash=a.getAttribute('href');
+      if(!hash || hash==='#') return;
+      const target=document.getElementById(hash.slice(1));
+      if(target){e.preventDefault();target.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});}
+    });
+  });
+
+  let raf=false;
+  const update=()=>{
+    const max=Math.max(1,root.scrollHeight-innerHeight);
+    bar.style.transform='scaleX('+Math.min(1,scrollY/max)+')';
+    document.querySelectorAll('.about-photo img,.gallery-grid img').forEach(img=>{
+      const r=img.getBoundingClientRect();
+      const offset=((r.top+r.height/2-innerHeight/2)/innerHeight)*-7;
+      img.style.setProperty('--parallax-y',Math.max(-10,Math.min(10,offset))+'px');
+    });
+    raf=false;
+  };
+  if(!reduce){
+    addEventListener('scroll',()=>{if(!raf){raf=true;requestAnimationFrame(update)}},{passive:true});
+    update();
+  }else bar.style.transform='scaleX(0)';
+
+  if(fine && !reduce){
+    addEventListener('pointermove',e=>{
+      cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';
+    },{passive:true});
+    document.querySelectorAll('.service').forEach(card=>{
+      card.addEventListener('pointermove',e=>{
+        const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+        card.style.setProperty('--tilt-x',(-y*3.2).toFixed(2)+'deg');
+        card.style.setProperty('--tilt-y',(x*3.2).toFixed(2)+'deg');
+      });
+      card.addEventListener('pointerleave',()=>{
+        card.style.setProperty('--tilt-x','0deg');card.style.setProperty('--tilt-y','0deg');
+      });
+    });
+  }
+})();
+
+</script>
+</body></html>
