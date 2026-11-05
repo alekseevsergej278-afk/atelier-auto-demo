@@ -44,10 +44,9 @@
   <main id="main">
     <section class="hero" id="top" aria-labelledby="hero-title">
       <video class="hero__video" autoplay muted loop playsinline preload="metadata"
-        poster="assets/video/atelier-driving-poster.jpg" aria-hidden="true">
-        <source src="assets/video/atelier-driving-360.mp4" type="video/mp4" media="(max-width: 700px)">
-        <source src="assets/video/atelier-driving-720.mp4" type="video/mp4">
-      </video>
+        data-mobile-src="assets/video/atelier-driving-360.mp4"
+        data-desktop-src="assets/video/atelier-driving-720.mp4"
+        poster="assets/video/atelier-driving-poster.jpg" aria-hidden="true"></video>
       <div class="hero__overlay" aria-hidden="true"></div>
 
       <div class="container hero__content">
@@ -78,70 +77,54 @@
     </div>
 
     <section class="section services" id="services" aria-labelledby="services-title">
-      <div class="container">
-        <div class="section-heading" data-reveal>
-          <div>
-            <p class="eyebrow">Направления работ</p>
-            <h2 id="services-title">С чем можно<br>обратиться</h2>
-          </div>
-          <p class="section-heading__note">
-            Состав работ и необходимые запчасти определяются после осмотра автомобиля.
+      <div class="container services__layout">
+        <div class="services__intro" data-reveal>
+          <p class="eyebrow">В мастерской</p>
+          <h2 id="services-title">С какими вопросами приезжают</h2>
+          <p class="services__lead">
+            Плановое обслуживание или странный звук, который появился на прошлой неделе.
+            Начинаем с осмотра и выясняем, что происходит с машиной.
+          </p>
+          <p class="services__note">
+            Перечень работ и стоимость обсуждаем после проверки автомобиля.
           </p>
         </div>
 
-        <div class="service-grid">
-          <article class="service-card" data-reveal>
-            <span class="service-card__number">01</span>
-            <div>
-              <h3>Техническое обслуживание</h3>
-              <p>Замена масла и фильтров, проверка жидкостей и основных узлов. Состав ТО зависит от регламента конкретной модели.</p>
-            </div>
-            <span class="service-card__mark" aria-hidden="true">↗</span>
+        <div class="service-list" aria-label="Направления работ">
+          <article class="service-row" data-reveal>
+            <span class="service-row__number">01</span>
+            <h3>Замена масла и ТО</h3>
+            <p>Масло, фильтры, технические жидкости и проверки по регламенту именно вашей модели. Подскажем, что пора менять, а что ещё послужит.</p>
           </article>
 
-          <article class="service-card" data-reveal>
-            <span class="service-card__number">02</span>
-            <div>
-              <h3>Компьютерная диагностика</h3>
-              <p>Проверка электронных систем и чтение ошибок. Код неисправности — повод для проверки, а не готовый диагноз.</p>
-            </div>
-            <span class="service-card__mark" aria-hidden="true">↗</span>
+          <article class="service-row" data-reveal>
+            <span class="service-row__number">02</span>
+            <h3>Диагностика электроники</h3>
+            <p>Загорелся индикатор или появились ошибки? Считываем коды, проверяем показания и ищем причину — сам код ещё не повод менять деталь.</p>
           </article>
 
-          <article class="service-card" data-reveal>
-            <span class="service-card__number">03</span>
-            <div>
-              <h3>Подвеска и рулевое управление</h3>
-              <p>Поиск стуков и люфтов, осмотр амортизаторов, рычагов и элементов рулевого управления.</p>
-            </div>
-            <span class="service-card__mark" aria-hidden="true">↗</span>
+          <article class="service-row" data-reveal>
+            <span class="service-row__number">03</span>
+            <h3>Стук в подвеске</h3>
+            <p>Проверяем люфты, амортизаторы, рычаги и рулевые тяги. Важно понять, откуда идёт звук, особенно если он появляется только на неровной дороге.</p>
           </article>
 
-          <article class="service-card" data-reveal>
-            <span class="service-card__number">04</span>
-            <div>
-              <h3>Тормозная система</h3>
-              <p>Проверка колодок, дисков, суппортов и тормозной жидкости. Решение о замене принимается по состоянию деталей.</p>
-            </div>
-            <span class="service-card__mark" aria-hidden="true">↗</span>
+          <article class="service-row" data-reveal>
+            <span class="service-row__number">04</span>
+            <h3>Тормоза</h3>
+            <p>Осматриваем колодки и диски, проверяем суппорты и состояние жидкости. Вибрацию или увод машины при торможении лучше описать заранее.</p>
           </article>
 
-          <article class="service-card" data-reveal>
-            <span class="service-card__number">05</span>
-            <div>
-              <h3>Двигатель и трансмиссия</h3>
-              <p>Диагностика работы агрегатов, проверка на утечки и посторонние шумы, обслуживание по состоянию.</p>
-            </div>
-            <span class="service-card__mark" aria-hidden="true">↗</span>
+          <article class="service-row" data-reveal>
+            <span class="service-row__number">05</span>
+            <h3>Двигатель и коробка</h3>
+            <p>Потёки, посторонний шум, вибрация или непривычные переключения — фиксируем симптомы и проверяем узлы, с которыми они могут быть связаны.</p>
           </article>
 
-          <article class="service-card" data-reveal>
-            <span class="service-card__number">06</span>
-            <div>
-              <h3>Шины и колёса</h3>
-              <p>Сезонная смена шин, балансировка и осмотр колёс перед установкой.</p>
-            </div>
-            <span class="service-card__mark" aria-hidden="true">↗</span>
+          <article class="service-row" data-reveal>
+            <span class="service-row__number">06</span>
+            <h3>Шины и колёса</h3>
+            <p>Сезонная смена, балансировка, проверка давления и осмотр шин. Обратим внимание на неравномерный износ и повреждения.</p>
           </article>
         </div>
       </div>
