@@ -70,11 +70,6 @@
       document.addEventListener(eventName, playHeroVideo, { passive: true });
     });
 
-    if (!window.matchMedia("(max-width: 700px)").matches) {
-      heroVideo.src = "assets/video/atelier-driving-720.mp4";
-      heroVideo.load();
-    }
-
     playHeroVideo();
   }
 
