@@ -31,65 +31,51 @@
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const heroVideo = document.querySelector(".hero__video");
-  const videoStartButton = document.querySelector(".hero__video-start");
 
   if (heroVideo) {
+    // Muted inline autoplay is supported by current desktop and mobile browsers.
+    // Keep an MP4 source in the markup as a fallback and use the HD file on desktop.
     heroVideo.muted = true;
     heroVideo.defaultMuted = true;
+    heroVideo.volume = 0;
     heroVideo.playsInline = true;
+    heroVideo.autoplay = true;
+    heroVideo.loop = true;
     heroVideo.setAttribute("muted", "");
     heroVideo.setAttribute("playsinline", "");
+    heroVideo.setAttribute("autoplay", "");
+    heroVideo.setAttribute("loop", "");
 
-    // The mobile file is the native HTML fallback. Use the larger file on desktop only.
+    const playHeroVideo = () => {
+      if (document.visibilityState !== "visible" || !heroVideo.paused) return;
+      const playback = heroVideo.play();
+      if (playback && typeof playback.catch === "function") {
+        // Never show a play button: retry on media readiness, tab focus and user gesture.
+        playback.catch(() => {});
+      }
+    };
+
+    ["loadedmetadata", "loadeddata", "canplay", "canplaythrough"].forEach((eventName) => {
+      heroVideo.addEventListener(eventName, playHeroVideo);
+    });
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") playHeroVideo();
+      else heroVideo.pause();
+    });
+    window.addEventListener("pageshow", playHeroVideo);
+
+    // A few browsers defer muted autoplay until the first ordinary page interaction.
+    ["pointerdown", "touchstart", "keydown"].forEach((eventName) => {
+      document.addEventListener(eventName, playHeroVideo, { passive: true });
+    });
+
     if (!window.matchMedia("(max-width: 700px)").matches) {
       heroVideo.src = "assets/video/atelier-driving-720.mp4";
       heroVideo.load();
     }
 
-    const showStartButton = () => {
-      if (videoStartButton) videoStartButton.hidden = false;
-    };
-
-    const hideStartButton = () => {
-      if (videoStartButton) videoStartButton.hidden = true;
-    };
-
-    const playHeroVideo = async () => {
-      if (document.visibilityState !== "visible") return;
-
-      try {
-        await heroVideo.play();
-        hideStartButton();
-      } catch (error) {
-        // Some mobile browsers block autoplay; offer a direct tap-to-play control.
-        showStartButton();
-      }
-    };
-
-    heroVideo.addEventListener("playing", hideStartButton);
-    heroVideo.addEventListener("error", showStartButton);
-    if (heroVideo.error) showStartButton();
-
-    if (videoStartButton) {
-      videoStartButton.addEventListener("click", () => {
-        heroVideo.muted = true;
-        playHeroVideo();
-      });
-    }
-
-    if (reducedMotion) {
-      heroVideo.pause();
-      showStartButton();
-    } else {
-      heroVideo.addEventListener("loadeddata", playHeroVideo, { once: true });
-      heroVideo.addEventListener("canplay", playHeroVideo, { once: true });
-      document.addEventListener("visibilitychange", () => {
-        if (document.visibilityState === "visible") playHeroVideo();
-        else heroVideo.pause();
-      });
-      window.addEventListener("pageshow", playHeroVideo);
-      playHeroVideo();
-    }
+    playHeroVideo();
   }
 
   const revealItems = document.querySelectorAll("[data-reveal]");

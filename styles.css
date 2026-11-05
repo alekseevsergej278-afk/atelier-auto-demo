@@ -114,15 +114,20 @@ section[id] { scroll-margin-top: 88px; }
   align-items: center;
   isolation: isolate;
   overflow: hidden;
-  background: #111314 url("assets/video/atelier-driving-poster.jpg") center 52%/cover no-repeat;
+  background: #111314 url("assets/video/atelier-driving-poster.jpg") left center/cover no-repeat;
 }
 .hero__video, .hero__overlay { position: absolute; inset: 0; width: 100%; height: 100%; }
-.hero__video { z-index: 0; object-fit: cover; object-position: center 54%; pointer-events: none; }
+.hero__video { z-index: 0; object-fit: cover; object-position: left center; pointer-events: none; }
 .hero__overlay {
   z-index: 1;
-  background:
-    linear-gradient(90deg, #111314 0%, #111314e8 34%, #11131455 72%, #11131420 100%),
-    linear-gradient(0deg, #111314 0%, transparent 42%);
+  /* Keep the car visible on the left; place most of the contrast gradient on the right. */
+  background: linear-gradient(90deg, transparent 0%, #11131410 42%, #11131435 70%, #11131478 100%);
+}
+.hero__content .eyebrow,
+.hero__content h1,
+.hero__content .hero__description,
+.hero__content .hero__caption {
+  text-shadow: 0 2px 12px #000c;
 }
 .hero__content { padding-block: 100px 118px; position: relative; z-index: 2; }
 .hero__edge-note { z-index: 2; }
@@ -157,22 +162,6 @@ section[id] { scroll-margin-top: 88px; }
 .text-link { color: #e0dfd9; border-bottom: 1px solid #858887; padding-bottom: 7px; }
 .text-link span { color: var(--accent-soft); padding-left: 5px; }
 .hero__caption { margin-top: 68px; color: #a5a8a6; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
-.hero__video-start {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 14px;
-  padding: 10px 13px;
-  border: 1px solid #ffffff70;
-  background: #111314c9;
-  color: var(--paper);
-  font-size: 10px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-.hero__video-start span { color: var(--accent-soft); }
-.hero__video-start[hidden] { display: none; }
 .hero__edge-note {
   position: absolute;
   right: 24px;
@@ -473,12 +462,11 @@ section[id] { scroll-margin-top: 88px; }
   .hero { min-height: 660px; }
   .hero__video {
     object-position: left center;
-    filter: brightness(1.12) saturate(1.08);
+    filter: brightness(1.16) saturate(1.12);
   }
   .hero__overlay {
-    background:
-      linear-gradient(90deg, #111314bf 0%, #11131470 42%, #11131420 100%),
-      linear-gradient(0deg, #111314 0%, transparent 52%);
+    /* Mobile framing keeps the car at the left edge clear instead of hiding it in a dark wash. */
+    background: linear-gradient(90deg, transparent 0%, #11131412 58%, #11131458 100%);
   }
   .hero__content { padding-block: 90px 105px; }
   .hero h1 { font-size: clamp(52px, 12vw, 76px); }
