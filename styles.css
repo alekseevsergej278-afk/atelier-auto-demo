@@ -241,7 +241,7 @@ section[id] { scroll-margin-top: 88px; }
   font-size: 10px;
   line-height: 1.8;
 }
-.service-list { border-top: 1px solid #555b5b; }
+.service-list { border-top: 0; }
 .service-list__head {
   display: grid;
   grid-template-columns: 36px minmax(0, 1fr) 130px;
